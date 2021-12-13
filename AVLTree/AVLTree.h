@@ -10,10 +10,10 @@ template <typename Type> class AVLTree;
 template <typename Type>
 class AVLNode {
 private:
-	Type val; //Öµ
-	int height;//ÒÔµ±Ç°½áµãÎª¸ùµÄÊ÷µÄ¸ß¶È
-	int size; //ÒÔ¸Ã½ÚµãÎª¸ùµÄÊ÷µÄ×Ü½áµãÊı£¨°üÀ¨ÖØ¸´µÄ£©
-	int freq; //¸ÃÊı¾İÖØ¸´Æµ´Î
+	Type val; //å€¼
+	int height;//ä»¥å½“å‰ç»“ç‚¹ä¸ºæ ¹çš„æ ‘çš„é«˜åº¦
+	int size; //ä»¥è¯¥èŠ‚ç‚¹ä¸ºæ ¹çš„æ ‘çš„æ€»ç»“ç‚¹æ•°ï¼ˆåŒ…æ‹¬é‡å¤çš„ï¼‰
+	int freq; //è¯¥æ•°æ®é‡å¤é¢‘æ¬¡
 	AVLNode* left, * right;
 	friend class AVLTree<Type>;
 public:
@@ -26,28 +26,28 @@ class AVLTree {
 private:
 	AVLNode<Type>* root;
 
-	inline void Fix(AVLNode<Type>*& ptr); //¶ÔÊı¾İÓòµÄÎ¬»¤
-	inline void Maintain(AVLNode<Type>*& ptr); //Î¬»¤Æ½ºâ½á¹¹
+	inline void Fix(AVLNode<Type>*& ptr); //å¯¹æ•°æ®åŸŸçš„ç»´æŠ¤
+	inline void Maintain(AVLNode<Type>*& ptr); //ç»´æŠ¤å¹³è¡¡ç»“æ„
 
-	inline int GetHeight(AVLNode<Type>* ptr); //»ñÈ¡¸ß¶È
-	inline int GetNodenum(AVLNode<Type>* ptr); //»ñÈ¡¸Ã×ÓÊ÷µÄ½ÚµãÊı
+	inline int GetHeight(AVLNode<Type>* ptr); //è·å–é«˜åº¦
+	inline int GetNodenum(AVLNode<Type>* ptr); //è·å–è¯¥å­æ ‘çš„èŠ‚ç‚¹æ•°
 
-	void RotateL(AVLNode<Type>*& ptr); //×óµ¥Ğı
-	void RotateR(AVLNode<Type>*& ptr); //ÓÒµ¥Ğı
-	void RotateLR(AVLNode<Type>*& ptr); //×óÓÒË«Ğı
-	void RotateRL(AVLNode<Type>*& ptr); //ÓÒ×óË«Ğı
+	void RotateL(AVLNode<Type>*& ptr); //å·¦å•æ—‹
+	void RotateR(AVLNode<Type>*& ptr); //å³å•æ—‹
+	void RotateLR(AVLNode<Type>*& ptr); //å·¦å³åŒæ—‹
+	void RotateRL(AVLNode<Type>*& ptr); //å³å·¦åŒæ—‹
 
-	void inserter_1(AVLNode<Type>*& ptr, Type& el); //µİ¹éÊµÏÖ²åÈë
-	void inserter_2(AVLNode<Type>*& ptr, Type& el); //µü´úÊµÏÖ²åÈë
-	void deleter_1(AVLNode<Type>*& ptr, Type& el); //µİ¹éÊµÏÖÉ¾³ı
-	void deleter_2(AVLNode<Type>*& ptr, Type& el); //µü´úÊµÏÖÉ¾³ı
+	void inserter_1(AVLNode<Type>*& ptr, Type& el); //é€’å½’å®ç°æ’å…¥
+	void inserter_2(AVLNode<Type>*& ptr, Type& el); //è¿­ä»£å®ç°æ’å…¥
+	void deleter_1(AVLNode<Type>*& ptr, Type& el); //é€’å½’å®ç°åˆ é™¤
+	void deleter_2(AVLNode<Type>*& ptr, Type& el); //è¿­ä»£å®ç°åˆ é™¤
 
-	void preorder(AVLNode<Type>* ptr) const; //Ç°Ğò
-	void inorder(AVLNode<Type>* ptr) const; //ÖĞĞò
+	void preorder(AVLNode<Type>* ptr) const; //å‰åº
+	void inorder(AVLNode<Type>* ptr) const; //ä¸­åº
 
-	AVLNode<Type>* findKth(AVLNode<Type>* ptr, int k); //ÕÒµ½ÒÔptrÎª¸ùµÄÊ÷µÄµÚk¸öÔªËØ
+	AVLNode<Type>* findKth(AVLNode<Type>* ptr, int k); //æ‰¾åˆ°ä»¥pträ¸ºæ ¹çš„æ ‘çš„ç¬¬kä¸ªå…ƒç´ 
 
-	int Rank(AVLNode<Type>* ptr, int x); //µÃµ½xµÄÅÅÃû
+	int Rank(AVLNode<Type>* ptr, int x); //å¾—åˆ°xçš„æ’å
 
 	AVLNode<Type>* find(AVLNode<Type>* ptr, Type x);
 public:
@@ -59,9 +59,9 @@ public:
 	void PreorderTraversal() const;
 	void InorderTraversal() const;
 	Type Kth_Element(int k);
-	int GetRank(Type x); //µÃµ½xµÄÅÅÃû
-	Type Pre(Type x); //Ñ°ÕÒxµÄÇ°Çı
-	Type Suc(Type x); //Ñ°ÕÒxµÄºó¼Ì
+	int GetRank(Type x); //å¾—åˆ°xçš„æ’å
+	Type Pre(Type x); //å¯»æ‰¾xçš„å‰é©±
+	Type Suc(Type x); //å¯»æ‰¾xçš„åç»§
 	Type FindMin();
 	Type FindMax();
 	AVLNode<Type>* Find(Type x);
@@ -114,7 +114,7 @@ Type AVLTree<Type>::Pre(Type x) {
 	AVLNode<Type>* po = root;
 	Type ret = FindMin();
 	while (po) {
-		if (po->val < x) { //Ğ¡ÓÚÇÒ²»µÈÓÚµÄÇ°Çı
+		if (po->val < x) { //å°äºä¸”ä¸ç­‰äºçš„å‰é©±
 			ret = std::max(ret, po->val);
 			po = po->right;
 		} else
@@ -128,7 +128,7 @@ Type AVLTree<Type>::Suc(Type x) {
 	AVLNode<Type>* po = root;
 	Type ret = FindMax();
 	while (po) {
-		if (po->val > x) { //´óÓÚÇÒ²»µÈÓÚµÄºó¼Ì
+		if (po->val > x) { //å¤§äºä¸”ä¸ç­‰äºçš„åç»§
 			ret = std::min(ret, po->val);
 			po = po->left;
 		} else
@@ -147,7 +147,7 @@ inline void AVLTree<Type>::Fix(AVLNode<Type>*& ptr) {
 template <typename Type>
 inline void AVLTree<Type>::Maintain(AVLNode<Type>*& ptr) {
 	if (!ptr) return ;
-	if (GetHeight(ptr->right) - GetHeight(ptr->left) >= 2 && ptr->right) { //½øĞĞĞı×ªµ÷Õû
+	if (GetHeight(ptr->right) - GetHeight(ptr->left) >= 2 && ptr->right) { //è¿›è¡Œæ—‹è½¬è°ƒæ•´
 		if (GetHeight(ptr->right->right) >= GetHeight(ptr->right->left))
 			RotateL(ptr);
 		else
@@ -167,7 +167,7 @@ inline int AVLTree<Type>::GetNodenum(AVLNode<Type>* ptr) {
 }
 
 template <typename Type>
-AVLNode<Type>* AVLTree<Type>::findKth(AVLNode<Type>* ptr, int k) { //µü´úÊµÏÖ
+AVLNode<Type>* AVLTree<Type>::findKth(AVLNode<Type>* ptr, int k) { //è¿­ä»£å®ç°
 	if (!ptr) return nullptr;
 	if (GetNodenum(ptr->left) >= k) return findKth(ptr->left, k);
 	if (GetNodenum(ptr->left) + ptr->freq >= k) return ptr;
@@ -215,18 +215,18 @@ void AVLTree<Type>::InorderTraversal() const {
 
 template <typename Type>
 inline int AVLTree<Type>::GetHeight(AVLNode<Type>* ptr) {
-	if (!ptr) return 0; //ÉèÖÃÕâÃ´Ò»¸öGetHeight£¬¾ÍÊÇÎªÁË´¦Àí¿Õ½áµãÊ±µÄÇé¿ö
+	if (!ptr) return 0; //è®¾ç½®è¿™ä¹ˆä¸€ä¸ªGetHeightï¼Œå°±æ˜¯ä¸ºäº†å¤„ç†ç©ºç»“ç‚¹æ—¶çš„æƒ…å†µ
 	else return ptr->height;
 }
 
 template <typename Type>
 int AVLTree<Type>::Size() {
-	return GetNodenum(root); //Ò»¶¨ÒªÓÃÕâ¸ö£¬·ÀÖ¹³öÏÖ¿ÕµÄÊ±ºòµ÷ÓÃ
+	return GetNodenum(root); //ä¸€å®šè¦ç”¨è¿™ä¸ªï¼Œé˜²æ­¢å‡ºç°ç©ºçš„æ—¶å€™è°ƒç”¨
 }
 
 template <typename Type>
 bool AVLTree<Type>::Empty() {
-	return GetNodenum(root) == 0; //Ò»¶¨ÒªÓÃÕâ¸ö£¬·ÀÖ¹³öÏÖ¿ÕµÄÊ±ºòµ÷ÓÃ
+	return GetNodenum(root) == 0; //ä¸€å®šè¦ç”¨è¿™ä¸ªï¼Œé˜²æ­¢å‡ºç°ç©ºçš„æ—¶å€™è°ƒç”¨
 }
 
 template <typename Type>
@@ -236,7 +236,7 @@ void AVLTree<Type>::RotateL(AVLNode<Type>*& ptr) {
 	ptr = subL->right;
 	subL->right = ptr->left;
 	ptr->left = subL;
-	//×¢ÒâÒª¸üĞÂÊ÷µÄ¸ß¶ÈºÍ½áµãÊı£¬ÒÔ¼°Ë³ĞòÏÈ¸üĞÂsubL£¬ÔÙ¸üĞÂptr
+	//æ³¨æ„è¦æ›´æ–°æ ‘çš„é«˜åº¦å’Œç»“ç‚¹æ•°ï¼Œä»¥åŠé¡ºåºå…ˆæ›´æ–°subLï¼Œå†æ›´æ–°ptr
 	Fix(subL);
 	Fix(ptr);
 }
@@ -248,7 +248,7 @@ void AVLTree<Type>::RotateR(AVLNode<Type>*& ptr) {
 	ptr = subR->left;
 	subR->left = ptr->right;
 	ptr->right = subR;
-	//¸üĞÂ½áµã
+	//æ›´æ–°ç»“ç‚¹
 	Fix(subR);
 	Fix(ptr);
 }
@@ -256,7 +256,7 @@ void AVLTree<Type>::RotateR(AVLNode<Type>*& ptr) {
 template <typename Type>
 void AVLTree<Type>::RotateLR(AVLNode<Type>*& ptr) {
 	if (!ptr) return ;
-	//Ö±½ÓÀûÓÃÒÑÓĞµÄ×ó¡¢ÓÒµ¥ĞıÊµÏÖ×óÓÒË«Ğı
+	//ç›´æ¥åˆ©ç”¨å·²æœ‰çš„å·¦ã€å³å•æ—‹å®ç°å·¦å³åŒæ—‹
 	RotateL(ptr->left);
 	RotateR(ptr);
 }
@@ -264,7 +264,7 @@ void AVLTree<Type>::RotateLR(AVLNode<Type>*& ptr) {
 template <typename Type>
 void AVLTree<Type>::RotateRL(AVLNode<Type>*& ptr) {
 	if (!ptr) return ;
-	//Ö±½ÓÀûÓÃÒÑÓĞµÄ×ó¡¢ÓÒµ¥ĞıÊµÏÖ×óÓÒË«Ğı
+	//ç›´æ¥åˆ©ç”¨å·²æœ‰çš„å·¦ã€å³å•æ—‹å®ç°å·¦å³åŒæ—‹
 	RotateR(ptr->right);
 	RotateL(ptr);
 }
@@ -276,14 +276,14 @@ void AVLTree<Type>::inserter_1(AVLNode<Type>*& ptr, Type& el) {
 		return ;
 	}
 	if (el == ptr->val)
-		(ptr->freq)++; //£¡£¡£¡¼ÇµÃ¸üĞÂÆµÊı
+		(ptr->freq)++; //ï¼ï¼ï¼è®°å¾—æ›´æ–°é¢‘æ•°
 	else if (el < ptr->val)
-		inserter_1(ptr->left, el); //²åµ½×ó×ÓÊ÷È¥
+		inserter_1(ptr->left, el); //æ’åˆ°å·¦å­æ ‘å»
 	else if (el > ptr->val)
-		inserter_1(ptr->right, el); //²åµ½ÓÒ×ÓÊ÷È¥
-	//×îºó¸üĞÂÊ÷¸ßºÍ½áµãÊı
-	Fix(ptr); //ÏÈFixºóMaintain,MaintainÀïÃæ°üº¬ÁË¶ÔÎ¬»¤½áµãµÄFix
-	Maintain(ptr); //ÎŞÂÛ²åµ½×ó±ß»¹ÊÇÓÒ±ß×îºóÍ³Ò»Î¬»¤
+		inserter_1(ptr->right, el); //æ’åˆ°å³å­æ ‘å»
+	//æœ€åæ›´æ–°æ ‘é«˜å’Œç»“ç‚¹æ•°
+	Fix(ptr); //å…ˆFixåMaintain,Maintainé‡Œé¢åŒ…å«äº†å¯¹ç»´æŠ¤ç»“ç‚¹çš„Fix
+	Maintain(ptr); //æ— è®ºæ’åˆ°å·¦è¾¹è¿˜æ˜¯å³è¾¹æœ€åç»Ÿä¸€ç»´æŠ¤
 }
 
 template <typename Type>
@@ -307,7 +307,7 @@ void AVLTree<Type>::deleter_1(AVLNode<Type>*& ptr, Type& v) {
 				AVLNode<Type>* temp = ptr;
 				ptr = ptr->left;
 				delete (temp);
-			} else { //×ª»¯ÎªÉ¾³ıºó¼Ì
+			} else { //è½¬åŒ–ä¸ºåˆ é™¤åç»§
 				AVLNode<Type>* po = ptr->right;
 				while (po->left) po = po->left;
 				ptr->val = po->val;
@@ -328,7 +328,7 @@ void AVLTree<Type>::deleter_1(AVLNode<Type>*& ptr, Type& v) {
 template <typename Type>
 void AVLTree<Type>::deleter_2(AVLNode<Type>*& ptr, Type& el) {
 	AVLNode<Type>* parent = nullptr, * p = ptr, *q = nullptr, *grandparent = nullptr;
-	int connect = 0;//connectÓÃÓÚ±ê¼Ç£¬Ïê¼ûºóÃæ£¬ÒòÎªÏÔÊ½ÓÃÕ»´æ´¢£¬ËùÒÔ±ØĞëÒªÖªµÀÁ¬½Ó·½Ïò
+	int connect = 0;//connectç”¨äºæ ‡è®°ï¼Œè¯¦è§åé¢ï¼Œå› ä¸ºæ˜¾å¼ç”¨æ ˆå­˜å‚¨ï¼Œæ‰€ä»¥å¿…é¡»è¦çŸ¥é“è¿æ¥æ–¹å‘
 	stack<AVLNode<Type>*> sk;
 
 	while (p != nullptr) {
@@ -339,9 +339,9 @@ void AVLTree<Type>::deleter_2(AVLNode<Type>*& ptr, Type& el) {
 		else p = p->right;
 	}
 
-	if (p == nullptr) return ; //Î´ÕÒµ½ÒªÉ¾³ıµÄ½áµã
+	if (p == nullptr) return ; //æœªæ‰¾åˆ°è¦åˆ é™¤çš„ç»“ç‚¹
 
-	if (p->freq > 1) { //Èç¹ûÆµÊı´óÓÚ1
+	if (p->freq > 1) { //å¦‚æœé¢‘æ•°å¤§äº1
 		(p->freq)--;
 		Fix(p);
 		while (!sk.empty()) {
@@ -351,52 +351,52 @@ void AVLTree<Type>::deleter_2(AVLNode<Type>*& ptr, Type& el) {
 		return ;
 	}
 
-	if (p->left && p->right) { //±»É¾³ıµÄ½áµãÓĞÁ½¸ö¶ù×Ó£¬²ÉÓÃ×ª»¯³ÉÉ¾³ıºó¼ÌµÄ·½·¨
+	if (p->left && p->right) { //è¢«åˆ é™¤çš„ç»“ç‚¹æœ‰ä¸¤ä¸ªå„¿å­ï¼Œé‡‡ç”¨è½¬åŒ–æˆåˆ é™¤åç»§çš„æ–¹æ³•
 		parent = p;
 		sk.push(parent);
-		q = p->right; //ÔÚpµÄÓÒ×ÓÊ÷Ñ°ÕÒpµÄÖ±½Óºó¼Ì£¬Ò²¾ÍÊÇÓÒ×ÓÊ÷µÄ×î×ó±ß
+		q = p->right; //åœ¨pçš„å³å­æ ‘å¯»æ‰¾pçš„ç›´æ¥åç»§ï¼Œä¹Ÿå°±æ˜¯å³å­æ ‘çš„æœ€å·¦è¾¹
 		while (q->left) {
 			parent = q;
 			sk.push(parent);
 			q = q->left;
 		}
-		p->val = q->val; //ÓÃqÌî²¹p
-		p->freq = q->freq; //£¡£¡£¡£¡£¡£¡£¡£¡²»ÒªÍü¼ÇfreqµÄ¸²¸Ç
-		p = q; //±»É¾³ı½áµã×ª»¯Îªq
+		p->val = q->val; //ç”¨qå¡«è¡¥p
+		p->freq = q->freq; //ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ä¸è¦å¿˜è®°freqçš„è¦†ç›–
+		p = q; //è¢«åˆ é™¤ç»“ç‚¹è½¬åŒ–ä¸ºq
 	}
 
-	if (p->left != nullptr) q = p->left; //±»É¾³ı½áµãpÖ»ÓĞÒ»¸ö×ó¶ù×Óq
-	else q = p->right; //±»É¾³ı½áµãpÖ»ÓĞÒ»¸öÓÒ¶ù×Óq»òÕßÈ«¿Õ
+	if (p->left != nullptr) q = p->left; //è¢«åˆ é™¤ç»“ç‚¹påªæœ‰ä¸€ä¸ªå·¦å„¿å­q
+	else q = p->right; //è¢«åˆ é™¤ç»“ç‚¹påªæœ‰ä¸€ä¸ªå³å„¿å­qæˆ–è€…å…¨ç©º
 
-	if (parent == nullptr) ptr = q; //ËµÃ÷ÒªÉ¾³ıµÄÊÇ¸ù½áµã
-	else { //±»É¾³ıµÄ²»ÊÇ¸ù½áµã
-		if (parent->left == p) parent->left = q; //Ö±½Ó½ÓÉÏÈ¥
+	if (parent == nullptr) ptr = q; //è¯´æ˜è¦åˆ é™¤çš„æ˜¯æ ¹ç»“ç‚¹
+	else { //è¢«åˆ é™¤çš„ä¸æ˜¯æ ¹ç»“ç‚¹
+		if (parent->left == p) parent->left = q; //ç›´æ¥æ¥ä¸Šå»
 		else parent->right = q;
-		while (!sk.empty()) { //ÖØĞÂÆ½ºâ»¯
+		while (!sk.empty()) { //é‡æ–°å¹³è¡¡åŒ–
 			parent = sk.top();
-			sk.pop(); //´ÓÕ»ÖĞÍË³ö¸¸½áµã
+			sk.pop(); //ä»æ ˆä¸­é€€å‡ºçˆ¶ç»“ç‚¹
 
-			Fix(parent); //µ÷Õû¸¸½áµã
+			Fix(parent); //è°ƒæ•´çˆ¶ç»“ç‚¹
 
 			if (!sk.empty()) {
-				grandparent = sk.top(); //´ÓÕ»ÖĞµÃµ½×æ¸¸½áµãĞÅÏ¢
-				connect = (grandparent->left == parent) ? -1 : 1; //Ğı×ªºóÓëÉÏ²ãÁ¬½Ó·½Ïò
-			} else connect = 0; //Õ»¿Õ£¬Ğı×ªºó²»ÓëÉÏ²ãÁ¬½Ó
+				grandparent = sk.top(); //ä»æ ˆä¸­å¾—åˆ°ç¥–çˆ¶ç»“ç‚¹ä¿¡æ¯
+				connect = (grandparent->left == parent) ? -1 : 1; //æ—‹è½¬åä¸ä¸Šå±‚è¿æ¥æ–¹å‘
+			} else connect = 0; //æ ˆç©ºï¼Œæ—‹è½¬åä¸ä¸ä¸Šå±‚è¿æ¥
 
 			if (GetHeight(parent->left) - GetHeight(parent->right) == 1 || GetHeight(parent->left) - GetHeight(parent->right) == -1)
-				break;//case 1:|bf|=1£¬ËµÃ÷ÓÉ×óÓÒµÈ¸ß±ä³ÉÒ»¸ßÒ»µÍ£¬µ«ÊÇÕûÌå¸ß¶È²»±ä£¬²»±ØÔÙÏòÉÏĞı×ªµ÷Õû
+				break;//case 1:|bf|=1ï¼Œè¯´æ˜ç”±å·¦å³ç­‰é«˜å˜æˆä¸€é«˜ä¸€ä½ï¼Œä½†æ˜¯æ•´ä½“é«˜åº¦ä¸å˜ï¼Œä¸å¿…å†å‘ä¸Šæ—‹è½¬è°ƒæ•´
 
-			if (GetHeight(parent->left) != GetHeight(parent->right)) { //case 3:|bf|=2£¬ĞèÒª½øĞĞµ÷Õû
+			if (GetHeight(parent->left) != GetHeight(parent->right)) { //case 3:|bf|=2ï¼Œéœ€è¦è¿›è¡Œè°ƒæ•´
 				Maintain(parent);
 				if (connect == -1) grandparent->left = parent;
-				else if (connect == 1) grandparent->right = parent; //Ğı×ªºóĞÂ¸ùÓëÉÏÒ»²ãÁ¬½Ó
+				else if (connect == 1) grandparent->right = parent; //æ—‹è½¬åæ–°æ ¹ä¸ä¸Šä¸€å±‚è¿æ¥
 			}
-			q = parent; //case 2 |bf|=0 ËµÃ÷Ê÷µÄÕûÌå¸ß¶È-1£¬»¹ĞèÒª¼ÌĞøÏòÉÏµ÷Õû£¨°üÀ¨case 3µÄºóĞø´¦Àí£©
+			q = parent; //case 2 |bf|=0 è¯´æ˜æ ‘çš„æ•´ä½“é«˜åº¦-1ï¼Œè¿˜éœ€è¦ç»§ç»­å‘ä¸Šè°ƒæ•´ï¼ˆåŒ…æ‹¬case 3çš„åç»­å¤„ç†ï¼‰
 		}
-		if (sk.empty() == true) ptr = parent; //µ÷Õûµ½Ê÷µÄ¸ù½áµã
-		else { //»¹Î´µ÷Õûµ½Ê÷µÄ¸ù½áµã
+		if (sk.empty() == true) ptr = parent; //è°ƒæ•´åˆ°æ ‘çš„æ ¹ç»“ç‚¹
+		else { //è¿˜æœªè°ƒæ•´åˆ°æ ‘çš„æ ¹ç»“ç‚¹
 			while (!sk.empty()) {
-				Fix(sk.top()); //Ò»Â·»ØËİµ÷ÕûÂ·¾¶ÉÏ½áµãµÄnodenum
+				Fix(sk.top()); //ä¸€è·¯å›æº¯è°ƒæ•´è·¯å¾„ä¸Šç»“ç‚¹çš„nodenum
 				sk.pop();
 			}
 		}
