@@ -16,12 +16,12 @@ private:
 	};
 	Node* root;
 
-	inline unsigned int GetSize(Node* x) { return x ? x->size : 0; } //·ÀÖ¹RE
+	inline unsigned int GetSize(Node* x) { return x ? x->size : 0; } //é˜²æ­¢RE
 	inline void update(Node* x) { if (x) x->size = GetSize(x->child[0]) + GetSize(x->child[1]) + x->freq; }
-	inline int ident(Node* x, Node* f); //·µ»Ø0´ú±íxÊÇ×ó¶ù×Ó£¬1´ú±íÊÇÓÒ¶ù×Ó
+	inline int ident(Node* x, Node* f); //è¿”å›0ä»£è¡¨xæ˜¯å·¦å„¿å­ï¼Œ1ä»£è¡¨æ˜¯å³å„¿å­
 	inline void connect(Node* x, Node* fa, int how);
 	inline void rotate(Node* x);
-	inline void splay(Node* x, Node* y); //½«x splayÎªyµÄ¶ù×Ó
+	inline void splay(Node* x, Node* y); //å°†x splayä¸ºyçš„å„¿å­
 	void inorder(Node* ptr);
 public:
 	SplayTree(): root(nullptr) {}
@@ -38,13 +38,13 @@ public:
 template <typename Type>
 inline void SplayTree<Type>::splay(Node* x, Node* y) {
 	if (!x) return ;
-	while (x->father != y) { //Ö±µ½xµÄ¸¸Ç×ÊÇy
+	while (x->father != y) { //ç›´åˆ°xçš„çˆ¶äº²æ˜¯y
 		Node* p = x->father, * g = p->father;
 		if (g != y) ident(x, p)^ident(p, g) ? rotate(x) : rotate(p);
 		rotate(x);
 	}
-	update(x); //ÒòÎªÃ¿Ò»´Îrotate¶¼½«xÏòÉÏÒÆ£¬ËùÒÔsizeÒ»Ö±ÔÚ¸Ä±ä£¬ÔÚrotateÀïÃæupdateÒâÒå²»´ó£¬Ö»ĞèÒªÔÚ×îºóupdate¼´¿É
-	if (y == nullptr) root = x; //Èç¹ûyÊÇnullptr£¬¾ÍÒª¸Ä±ä¸ùÖ¸Õë
+	update(x); //å› ä¸ºæ¯ä¸€æ¬¡rotateéƒ½å°†xå‘ä¸Šç§»ï¼Œæ‰€ä»¥sizeä¸€ç›´åœ¨æ”¹å˜ï¼Œåœ¨rotateé‡Œé¢updateæ„ä¹‰ä¸å¤§ï¼Œåªéœ€è¦åœ¨æœ€åupdateå³å¯
+	if (y == nullptr) root = x; //å¦‚æœyæ˜¯nullptrï¼Œå°±è¦æ”¹å˜æ ¹æŒ‡é’ˆ
 }
 
 template <typename Type>
@@ -65,7 +65,7 @@ inline void SplayTree<Type>::connect(Node* x, Node* fa, int how) {
 
 template <typename Type>
 inline int SplayTree<Type>::ident(Node* x, Node* f) {
-	if (!f) return 0; //¸¸½áµãÎª¿Õ£¬·ÀÖ¹RE
+	if (!f) return 0; //çˆ¶ç»“ç‚¹ä¸ºç©ºï¼Œé˜²æ­¢RE
 	return f->child[1] == x;
 }
 
@@ -84,8 +84,8 @@ void SplayTree<Type>::Inorder() {
 }
 
 template <typename Type>
-Type SplayTree<Type>::Pre_une(Type val) { //ÏÈ²åÈë£¬È»ºóÕÒÇ°Çı£¬×îºóÉ¾³ı
-	Insert(val); //²åÈëºóvalÊÇÔÚ¸ù½áµã
+Type SplayTree<Type>::Pre_une(Type val) { //å…ˆæ’å…¥ï¼Œç„¶åæ‰¾å‰é©±ï¼Œæœ€ååˆ é™¤
+	Insert(val); //æ’å…¥åvalæ˜¯åœ¨æ ¹ç»“ç‚¹
 	Node* x = root->child[0];
 	while (x->child[1]) x = x->child[1];
 	Remove(val);
@@ -93,8 +93,8 @@ Type SplayTree<Type>::Pre_une(Type val) { //ÏÈ²åÈë£¬È»ºóÕÒÇ°Çı£¬×îºóÉ¾³ı
 }
 
 template <typename Type>
-Type SplayTree<Type>::Suc_une(Type val) { //ÏÈ²åÈë£¬È»ºóÕÒºó¼Ì£¬×îºóÉ¾³ı
-	Insert(val); //²åÈëºóvalÊÇÔÚ¸ù½áµã
+Type SplayTree<Type>::Suc_une(Type val) { //å…ˆæ’å…¥ï¼Œç„¶åæ‰¾åç»§ï¼Œæœ€ååˆ é™¤
+	Insert(val); //æ’å…¥åvalæ˜¯åœ¨æ ¹ç»“ç‚¹
 	Node* x = root->child[1];
 	while (x->child[0]) x = x->child[0];
 	Remove(val);
@@ -103,7 +103,7 @@ Type SplayTree<Type>::Suc_une(Type val) { //ÏÈ²åÈë£¬È»ºóÕÒºó¼Ì£¬×îºóÉ¾³ı
 
 template <typename Type>
 int SplayTree<Type>::Rank(Type val) {
-	Find(val); //Findºó£¬valÔÚ¸ù½áµã
+	Find(val); //Findåï¼Œvalåœ¨æ ¹ç»“ç‚¹
 	return GetSize(root->child[0]) + 1;
 }
 
@@ -122,26 +122,27 @@ Type SplayTree<Type>::Kth_Element(int k) {
 }
 
 template <typename Type>
-bool SplayTree<Type>::Find(Type val) { //½«×îĞ¡µÄ´óÓÚµÈÓÚvalµÄÖµ£¬»òÕß×î´óµÄĞ¡ÓÚµÈÓÚvalµÄÖµsplayµ½¸ù
+bool SplayTree<Type>::Find(Type val) { //å°†æœ€å°çš„å¤§äºç­‰äºvalçš„å€¼ï¼Œæˆ–è€…æœ€å¤§çš„å°äºç­‰äºvalçš„å€¼splayåˆ°æ ¹
 	Node* x = root;
-	while ( x/*×¢ÒârootÎª¿ÕµÄÇé¿ö*/ && x->child[val > x->val] && val != x->val) x = x->child[val > x->val];
+	while ( x/*æ³¨æ„rootä¸ºç©ºçš„æƒ…å†µ*/ && x->child[val > x->val] && val != x->val) x = x->child[val > x->val];
+	if (!x) return false;
 	if (x) splay(x, nullptr);
 	return (x->val == val) ? true : false;
 }
 
 template <typename Type>
 void SplayTree<Type>::Insert(Type val) {
-	if (!root) { //ÌØÅĞ¸ùÎª¿ÕµÄÇé¿ö
+	if (!root) { //ç‰¹åˆ¤æ ¹ä¸ºç©ºçš„æƒ…å†µ
 		root = new Node(val);
 		return ;
 	}
 	for (Node* x = root; x; x = x->child[val > x->val]) {
 		if (x->val == val) {
-			x->freq++; //Ôö¼ÓÆµÊı
-			splay(x, nullptr); //×¢Òâsplay
+			x->freq++; //å¢åŠ é¢‘æ•°
+			splay(x, nullptr); //æ³¨æ„splay
 			return ;
 		}
-		if (!x->child[val > x->val]) { //Óöµ½ÁË¿Õ
+		if (!x->child[val > x->val]) { //é‡åˆ°äº†ç©º
 			x->child[ val > x->val] = new Node(val);
 			x->child[val > x->val]->father = x;
 			splay(x->child[val > x->val], nullptr);
@@ -152,22 +153,22 @@ void SplayTree<Type>::Insert(Type val) {
 
 template <typename Type>
 void SplayTree<Type>::Remove(Type val) {
-	//²»Ñ¡ÔñÀûÓÃÇ°ÇıºÍºó¼ÌÉ¾³ıµÄ·½Ê½£¬ÒòÎªÕâÑù±ØĞë²åÈëINFºÍ-INF£¬·ñÔòÈİÒ×RE
-	Find(val); //½«val splayµ½¸ù
-	if (root->val != val) return ; //ÕÒ²»µ½
+	//ä¸é€‰æ‹©åˆ©ç”¨å‰é©±å’Œåç»§åˆ é™¤çš„æ–¹å¼ï¼Œå› ä¸ºè¿™æ ·å¿…é¡»æ’å…¥INFå’Œ-INFï¼Œå¦åˆ™å®¹æ˜“RE
+	Find(val); //å°†val splayåˆ°æ ¹
+	if (root->val != val) return ; //æ‰¾ä¸åˆ°
 	Node* x = root;
 	if (x->freq > 1) x->freq--;
 	else {
-		if (!x->child[0]) { //ÓĞÒ»¸ö×ÓÊ÷ÊÇ¿Õ
-			root = x->child[1]; //×ªÒÆroot
-			if (root) root->father = nullptr; //·ÀÖ¹RE
-			delete x; //»ØÊÕ
+		if (!x->child[0]) { //æœ‰ä¸€ä¸ªå­æ ‘æ˜¯ç©º
+			root = x->child[1]; //è½¬ç§»root
+			if (root) root->father = nullptr; //é˜²æ­¢RE
+			delete x; //å›æ”¶
 		} else {
 			Node* k = x->child[0];
-			while (k->child[1]) k = k->child[1]; //Ñ°ÕÒÇ°Çı
+			while (k->child[1]) k = k->child[1]; //å¯»æ‰¾å‰é©±
 			splay(k, x);
-			root = k, root->father = nullptr; //´ËÊ±×ó×ÓÊ÷µÄÓÒ×ÓÊ÷¿Ï¶¨ÊÇ¿Õ
-			connect(x->child[1], root, 1); //ÔÙ½«ÓÒ×ÓÊ÷×ªÒÆµ½×ó×ÓÊ÷
+			root = k, root->father = nullptr; //æ­¤æ—¶å·¦å­æ ‘çš„å³å­æ ‘è‚¯å®šæ˜¯ç©º
+			connect(x->child[1], root, 1); //å†å°†å³å­æ ‘è½¬ç§»åˆ°å·¦å­æ ‘
 			delete x;
 		}
 	}
