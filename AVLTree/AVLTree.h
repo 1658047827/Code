@@ -51,7 +51,9 @@ private:
 
 	AVLNode<Type>* find(AVLNode<Type>* ptr, Type x);
 public:
-	AVLTree(): root(nullptr) {}
+	AVLTree(): root(nullptr) {
+//		Insert(INT_MAX), Insert(INTMAX_MIN); //有时要事先放两个极值防止RE
+	}
 	void Insert(Type el);
 	void Remove(Type el);
 	int Size();
