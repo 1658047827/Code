@@ -24,7 +24,9 @@ private:
 	inline void splay(Node* x, Node* y); //将x splay为y的儿子
 	void inorder(Node* ptr);
 public:
-	SplayTree(): root(nullptr) {}
+	SplayTree(): root(nullptr) {
+//		Insert(INT_MAX), Insert(INT_MIN); //有时要事先放两个极值防止RE	
+	}
 	void Insert(Type val);
 	void Remove(Type val);
 	bool Find(Type val);
