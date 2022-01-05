@@ -7,24 +7,24 @@ Vim::Vim() :Mode(0), CommandCursorCol(8), QCommand(0) {
 
 void Vim::Welcome() {
 	printf("Simple Vim\n\n");
-	printf("1 ÊäÈë  :open filename  ´ò¿ªÎÄ¼ş\n");
-	printf("2 ÊäÈë  :W filename     ±£´æÎÄ¼ş\n");
-	printf("3 ÊäÈë  :q              ÍË³ö³ÌĞò\n");
-	printf("4 °´ÏÂ  i               ´Ónormal½øÈëinsert\n");
-	printf("5 °´ÏÂ  Esc             ´Óinsert½øÈënormal\n");
-	printf("6 °´ÏÂ  x               É¾³ıµ±Ç°¹â±ê´¦µÄÒ»¸ö×Ö·û\n");
-	printf("7 °´ÏÂ  u               ³·Ïú²Ù×÷\n");
-	printf("8 °´ÏÂ  r               ÖØ×ö²Ù×÷\n");
-	printf("9 ÊäÈë  /pattern        ´Óµ±Ç°¹â±ê¿ªÊ¼ÍùºóËÑË÷pattern\n");
+	printf("1 è¾“å…¥  :open filename  æ‰“å¼€æ–‡ä»¶\n");
+	printf("2 è¾“å…¥  :w filename     ä¿å­˜æ–‡ä»¶\n");
+	printf("3 è¾“å…¥  :q              é€€å‡ºç¨‹åº\n");
+	printf("4 æŒ‰ä¸‹  i               ä»normalè¿›å…¥insert\n");
+	printf("5 æŒ‰ä¸‹  Esc             ä»insertè¿›å…¥normal\n");
+	printf("6 æŒ‰ä¸‹  x               åˆ é™¤å½“å‰å…‰æ ‡å¤„çš„ä¸€ä¸ªå­—ç¬¦\n");
+	printf("7 æŒ‰ä¸‹  u               æ’¤é”€æ“ä½œ\n");
+	printf("8 æŒ‰ä¸‹  r               é‡åšæ“ä½œ\n");
+	printf("9 è¾“å…¥  /pattern        ä»å½“å‰å…‰æ ‡å¼€å§‹å¾€åæœç´¢pattern\n");
 	screen->FlushScreen();
-	char t = _getch(); //Í£¶ÙÒ»ÏÂ
+	char t = _getch(); //åœé¡¿ä¸€ä¸‹
 }
 
 void Vim::GetInput() {
 	char inputChar;
 	inputChar = _getch();
-	if (Mode == 0) { //normalÄ£Ê½
-		if (inputChar == ':' || inputChar == '/') { //×ª³ÉÃüÁîÄ£Ê½ »ò ËÑË÷
+	if (Mode == 0) { //normalæ¨¡å¼
+		if (inputChar == ':' || inputChar == '/') { //è½¬æˆå‘½ä»¤æ¨¡å¼ æˆ– æœç´¢
 			Mode = 2;
 			Command.clear();
 			Command.push_back(inputChar);
@@ -32,87 +32,87 @@ void Vim::GetInput() {
 		}
 		else {
 			switch (inputChar) {
-			case 'h': //×ó
+			case 'h': //å·¦
 				Text.MoveCursor(0);
 				break;
-			case 'j': //ÏÂ
+			case 'j': //ä¸‹
 				Text.MoveCursor(3);
 				break;
-			case 'k': //ÉÏ
+			case 'k': //ä¸Š
 				Text.MoveCursor(2);
 				break;
-			case 'l': //ÓÒ
+			case 'l': //å³
 				Text.MoveCursor(1);
 				break;
-			case 'i': //×ª³É²åÈëÄ£Ê½
+			case 'i': //è½¬æˆæ’å…¥æ¨¡å¼
 				Mode = 1;
 				break;
-			case 'u': //³·Ïú
+			case 'u': //æ’¤é”€
 				Text.urdo->Undo();
 				break;
-			case 'r': //ÖØ×ö
+			case 'r': //é‡åš
 				Text.urdo->Redo();
 				break;
-			case 'x': //É¾³ı
+			case 'x': //åˆ é™¤
 				Text.Delete();
 				break;
 			}
 		}
 	}
-	else if (Mode == 1) { //insertÄ£Ê½
+	else if (Mode == 1) { //insertæ¨¡å¼
 		if (inputChar == 27) Mode = 0;
-		else if (inputChar == -32) { //¶ÁÈ¡·½Ïò¼ü
+		else if (inputChar == -32) { //è¯»å–æ–¹å‘é”®
 			inputChar = _getch();
 			switch (inputChar) {
-			case 72: //ÉÏ
+			case 72: //ä¸Š
 				Text.MoveCursor(2);
 				break;
-			case 80: //ÏÂ
+			case 80: //ä¸‹
 				Text.MoveCursor(3);
 				break;
-			case 75: //×ó
+			case 75: //å·¦
 				Text.MoveCursor(0);
 				break;
-			case 77: //ÓÒ
+			case 77: //å³
 				Text.MoveCursor(1);
 				break;
 			}
 		}
 		else {
 			switch (inputChar) {
-			case 13: //»Ø³µ
+			case 13: //å›è½¦
 				Text.Enter();
 				break;
-			case 8: //ÍË¸ñ
+			case 8: //é€€æ ¼
 				Text.Delete();
 				break;
-			case '\t': //ÖÆ±í·û×ª»¯Îª4¸ö¿Õ¸ñ
+			case '\t': //åˆ¶è¡¨ç¬¦è½¬åŒ–ä¸º4ä¸ªç©ºæ ¼
 				for(int i=0;i<4;++i) Text.Insert(' ');
 				break;
-			default: //²åÈë
+			default: //æ’å…¥
 				Text.Insert(inputChar);
 				break;
 			}
 		}
 	}
-	else { //commandÄ£Ê½
+	else { //commandæ¨¡å¼
 		if (Command.size() == 0) {
 			Mode = 0;
 			ProcessResult = "";
 		}
 		else {
 			switch (inputChar) {
-			case 13: //»Ø³µ´¦ÀíÃüÁî
+			case 13: //å›è½¦å¤„ç†å‘½ä»¤
 				ProcessCommand();
 				break;
-			case 8: //ÃüÁîÄÚÈİÍË¸ñ
+			case 8: //å‘½ä»¤å†…å®¹é€€æ ¼
 				CommandDelete();
 				break;
-			case 27: //EscÍË³öcommandÄ£Ê½
+			case 27: //Escé€€å‡ºcommandæ¨¡å¼
 				Command.clear();
 				ProcessResult.clear();
 				Mode = 0;
-			default: //ÃüÁîÄÚÈİ²åÈë
+			default: //å‘½ä»¤å†…å®¹æ’å…¥
 				CommandInsert(inputChar);
 				break;
 			}
@@ -120,7 +120,7 @@ void Vim::GetInput() {
 	}
 }
 
-void Vim::Work() { //Ñ­»·Ö´ĞĞº¯Êı
+void Vim::Work() { //å¾ªç¯æ‰§è¡Œå‡½æ•°
 	Welcome();
 	for (;;) {
 		screen->cls();
@@ -141,25 +141,25 @@ void Vim::PrintCommand() {
 	for (int i = 0; i < 32; ++i) putchar('-');
 	putchar('\n');
 
-	//Êä³ö<Ä£Ê½>£ºÃüÁî | ´¦Àí½á¹û
+	//è¾“å‡º<æ¨¡å¼>ï¼šå‘½ä»¤ | å¤„ç†ç»“æœ
 	putchar('<');
 	if (Mode == 0 || Mode == 2) printf("Normal");
 	else printf("Insert");
 	putchar('>');
-	if (Mode == 2) { //Ö»ÔÚÃüÁîÄ£Ê½ÏÂ²ÅÊä³öÃüÁîºÍ´¦Àí½á¹û
+	if (Mode == 2) { //åªåœ¨å‘½ä»¤æ¨¡å¼ä¸‹æ‰è¾“å‡ºå‘½ä»¤å’Œå¤„ç†ç»“æœ
 		cout << Command << " | ";
 		cout << ProcessResult;
 	}
 }
 
 void Vim::CommandInsert(char ch) {
-	if (ProcessResult.size() != 0) ProcessResult.clear(); //½øĞĞÏÂÒ»´ÎÃüÁî±à¼­£¬ĞèÒª°Ñ´¦Àí½á¹ûÇå¿Õ
+	if (ProcessResult.size() != 0) ProcessResult.clear(); //è¿›è¡Œä¸‹ä¸€æ¬¡å‘½ä»¤ç¼–è¾‘ï¼Œéœ€è¦æŠŠå¤„ç†ç»“æœæ¸…ç©º
 	Command.push_back(ch);
 	CommandCursorCol++;
 }
 
 void Vim::CommandDelete() {
-	if (ProcessResult.size() != 0) ProcessResult.clear(); //½øĞĞÏÂÒ»´ÎÃüÁî±à¼­£¬ĞèÒª°Ñ´¦Àí½á¹ûÇå¿Õ
+	if (ProcessResult.size() != 0) ProcessResult.clear(); //è¿›è¡Œä¸‹ä¸€æ¬¡å‘½ä»¤ç¼–è¾‘ï¼Œéœ€è¦æŠŠå¤„ç†ç»“æœæ¸…ç©º
 	if (Command.size()) Command.pop_back();
 	CommandCursorCol--;
 }
@@ -186,9 +186,9 @@ void Vim::ProcessCommand() {
 		ProcessResult = "Quit";
 	}
 	else
-		ProcessResult = "ÎŞĞ§ÃüÁî";
+		ProcessResult = "æ— æ•ˆå‘½ä»¤";
 
-	Command.clear();//Çå¿ÕÃüÁî
+	Command.clear();//æ¸…ç©ºå‘½ä»¤
 }
 
 
